@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace tp2SimulacionFINAL
 {
-    class GeneradorHelper
+    public class GeneradorHelper
     {
 
         public static double[] GenerarDistUniforme(int n, int a, int b) 

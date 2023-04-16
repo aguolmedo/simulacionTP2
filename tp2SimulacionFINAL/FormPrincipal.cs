@@ -91,22 +91,39 @@ namespace tp2SimulacionFINAL
 
         private void buttonGenerarMuestra_Click(object sender, EventArgs e)
         {
+
+            var cantIntervalos = textBoxCantIntervalos.Text == null | textBoxCantIntervalos.Text == "" ? Convert.ToInt32(Math.Ceiling(Math.Sqrt(Convert.ToInt32(textBoxTamañoMuestra.Text)))) : Convert.ToInt32(textBoxCantIntervalos.Text);
+
+            
             switch (comboBoxDistribucion.SelectedValue.ToString())
             {
                 case "1":
                     double[] muestraUniforme = GeneradorHelper.GenerarDistUniforme(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToInt32(textBoxParametro1.Text), Convert.ToInt32(textBoxParametro2.Text));
-                    dataGridViewMuestra.Columns.Clear(); 
+                    dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraUniforme.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
+
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(comboBoxDistribucion,dataGridViewDistFrecuencia, muestraUniforme, cantIntervalos);
+
                     break;
+                    
+                    
                 case "2":
                     double[] muestraExpNegativa = GeneradorHelper.GenerarDistExpNegativa(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToInt32(textBoxParametro1.Text));
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraExpNegativa.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
+
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(comboBoxDistribucion,dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos);
+
+
                     break;
                 case "3":
                     double[] muestraNormal = GeneradorHelper.GenerarDistNormal(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToInt32(textBoxParametro1.Text), Convert.ToInt32(textBoxParametro2.Text));
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraNormal.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
+
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(comboBoxDistribucion, dataGridViewDistFrecuencia, muestraNormal, cantIntervalos);
+
+
                     break;
 
             }
