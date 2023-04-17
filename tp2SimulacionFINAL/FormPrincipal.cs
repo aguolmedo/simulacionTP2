@@ -102,7 +102,7 @@ namespace tp2SimulacionFINAL
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraUniforme.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
 
-                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(comboBoxDistribucion,dataGridViewDistFrecuencia, muestraUniforme, cantIntervalos);
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), Convert.ToDouble(textBoxParametro2.Text), comboBoxDistribucion,dataGridViewDistFrecuencia, muestraUniforme, cantIntervalos);
 
                     break;
                     
@@ -112,7 +112,7 @@ namespace tp2SimulacionFINAL
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraExpNegativa.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
 
-                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(comboBoxDistribucion,dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos);
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), Convert.ToDouble(textBoxParametro2.Text), comboBoxDistribucion,dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos);
 
 
                     break;
@@ -121,7 +121,7 @@ namespace tp2SimulacionFINAL
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraNormal.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
 
-                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(comboBoxDistribucion, dataGridViewDistFrecuencia, muestraNormal, cantIntervalos);
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), Convert.ToDouble(textBoxParametro2.Text), comboBoxDistribucion, dataGridViewDistFrecuencia, muestraNormal, cantIntervalos);
 
 
                     break;

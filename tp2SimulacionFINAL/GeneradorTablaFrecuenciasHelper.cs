@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace tp2SimulacionFINAL
     public  class GeneradorTablaFrecuenciasHelper
     {
 
-        public static void GenerarTablaFrecuencias(ComboBox comboBoxDistribucion,DataGridView dataGrid,double[] muestraGenerada, int numIntervalos) {
+        public static void GenerarTablaFrecuencias(double media,double desviacion,ComboBox comboBoxDistribucion,DataGridView dataGrid,double[] muestraGenerada, int numIntervalos) {
             // Calcular la amplitud del intervalo
             double amplitud = ((muestraGenerada.Max() - muestraGenerada.Min()) / numIntervalos) + 0.01;
 
@@ -36,13 +37,13 @@ namespace tp2SimulacionFINAL
                 switch (comboBoxDistribucion.SelectedValue.ToString()) {
 
                     case "1":
-                        fe = (double)muestraGenerada.Length / numIntervalos; // Calcular la frecuencia esperada (FE)
+                        fe = (double)muestraGenerada.Length / numIntervalos; // Calcular la frecuencia esperada (FE) [UNIFORME]
                         break;
                     case "2":
-                        fe = (double)muestraGenerada.Length / numIntervalos; // Calcular la frecuencia esperada (FE)
+                        fe = (double)muestraGenerada.Length / numIntervalos; // Calcular la frecuencia esperada (FE) [EXP NEGATIVA]
                         break;
                     case "3":
-                        fe = (double)muestraGenerada.Length / numIntervalos; // Calcular la frecuencia esperada (FE)
+                        fe = calcularFrecuenciaEsperadaNormal(desviacion, media, desde, hasta, muestraGenerada.Length);// Calcular la frecuencia esperada (FE) [NORMAL]
                         break;
                 }
 
@@ -54,6 +55,30 @@ namespace tp2SimulacionFINAL
             // Asignar la lista como fuente de datos del DataGridView
             dataGrid.DataSource = tabla;
         }
+
+
+        public static double calcularFrecuenciaEsperadaNormal(double desviacion,double media,double desde, double hasta, int tamanioMuestra)
+        {
+            double marcaClase = (desde + hasta) / 2;
+
+            return calcularDensidad(media,desviacion,marcaClase) * (hasta - desde) * tamanioMuestra;
+        }
+
+        public static double calcularDensidad(double desviacion, double media,double x)
+        {
+            Double p1 = 1 / (desviacion * (Math.Sqrt(2 * Math.PI)));
+            Double p2 = Math.Pow(((x - media) / desviacion), 2);
+            Double p3 = -0.5 * p2;
+            double p4 = Math.Pow(Math.E, p3);
+
+            double p5 = p1 * p4;
+
+            return p5;
+        }
+
+
+
+
 
 
     }
