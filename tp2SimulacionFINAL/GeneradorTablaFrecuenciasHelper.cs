@@ -40,7 +40,7 @@ namespace tp2SimulacionFINAL
                         fe = (double)muestraGenerada.Length / numIntervalos; // Calcular la frecuencia esperada (FE) [UNIFORME]
                         break;
                     case "2":
-                        fe = (double)muestraGenerada.Length / numIntervalos; // Calcular la frecuencia esperada (FE) [EXP NEGATIVA]
+                        fe = (double) muestraGenerada.Length * (1 - Math.Exp(-(1/media) * hasta)) - muestraGenerada.Length * (1 - Math.Exp(-1/media * desde)); // Calcular la frecuencia esperada (FE) [EXP NEGATIVA]
                         break;
                     case "3":
                         fe = calcularFrecuenciaEsperadaNormal(desviacion, media, desde, hasta, muestraGenerada.Length);// Calcular la frecuencia esperada (FE) [NORMAL]
@@ -66,14 +66,13 @@ namespace tp2SimulacionFINAL
 
         public static double calcularDensidad(double desviacion, double media,double x)
         {
-            Double p1 = 1 / (desviacion * (Math.Sqrt(2 * Math.PI)));
-            Double p2 = Math.Pow(((x - media) / desviacion), 2);
-            Double p3 = -0.5 * p2;
+            var p1 = 1 / (desviacion * (Math.Sqrt(2 * Math.PI)));
+            var p2 = Math.Pow(((x - media) / desviacion), 2);
+            var p3 = -0.5 * p2;
             double p4 = Math.Pow(Math.E, p3);
 
-            double p5 = p1 * p4;
+            return p1 * p4;
 
-            return p5;
         }
 
 

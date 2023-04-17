@@ -111,8 +111,8 @@ namespace tp2SimulacionFINAL
                     double[] muestraExpNegativa = GeneradorHelper.GenerarDistExpNegativa(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToInt32(textBoxParametro1.Text));
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraExpNegativa.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
-
-                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), Convert.ToDouble(textBoxParametro2.Text), comboBoxDistribucion,dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos);
+                    double parametro2 = 0.0;
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), parametro2, comboBoxDistribucion, dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos); ;
 
 
                     break;
