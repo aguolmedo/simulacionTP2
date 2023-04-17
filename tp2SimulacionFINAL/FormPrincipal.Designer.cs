@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             labelDistribucion = new Label();
             comboBoxDistribucion = new ComboBox();
             labelTamañoMuestra = new Label();
@@ -43,13 +46,16 @@
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
             labelCantidadIntervalos = new Label();
-            textBoxCantIntervalos = new TextBox();
             dataGridViewDistFrecuencia = new DataGridView();
+            chartHistograma = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            buttonGraficar = new Button();
+            comboBoxCantIntervalos = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMuestra).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewDistFrecuencia).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartHistograma).BeginInit();
             SuspendLayout();
             // 
             // labelDistribucion
@@ -100,14 +106,14 @@
             // 
             textBoxParametro1.Location = new Point(121, 41);
             textBoxParametro1.Name = "textBoxParametro1";
-            textBoxParametro1.Size = new Size(108, 27);
+            textBoxParametro1.Size = new Size(122, 27);
             textBoxParametro1.TabIndex = 5;
             // 
             // textBoxParametro2
             // 
             textBoxParametro2.Location = new Point(121, 77);
             textBoxParametro2.Name = "textBoxParametro2";
-            textBoxParametro2.Size = new Size(108, 27);
+            textBoxParametro2.Size = new Size(122, 27);
             textBoxParametro2.TabIndex = 6;
             // 
             // labelParametro2
@@ -123,17 +129,17 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(42, 26);
+            label1.Location = new Point(18, 25);
             label1.Name = "label1";
-            label1.Size = new Size(382, 41);
+            label1.Size = new Size(203, 41);
             label1.TabIndex = 8;
-            label1.Text = "SUPER TRABAJO PRACTICO";
+            label1.Text = "TP2 - Grupo 9";
             // 
             // buttonGenerarMuestra
             // 
-            buttonGenerarMuestra.Location = new Point(76, 481);
+            buttonGenerarMuestra.Location = new Point(22, 495);
             buttonGenerarMuestra.Name = "buttonGenerarMuestra";
-            buttonGenerarMuestra.Size = new Size(113, 58);
+            buttonGenerarMuestra.Size = new Size(110, 58);
             buttonGenerarMuestra.TabIndex = 9;
             buttonGenerarMuestra.Text = "Generar";
             buttonGenerarMuestra.UseVisualStyleBackColor = true;
@@ -181,7 +187,7 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(textBoxCantIntervalos);
+            groupBox3.Controls.Add(comboBoxCantIntervalos);
             groupBox3.Controls.Add(labelCantidadIntervalos);
             groupBox3.Location = new Point(12, 371);
             groupBox3.Name = "groupBox3";
@@ -199,28 +205,58 @@
             labelCantidadIntervalos.TabIndex = 0;
             labelCantidadIntervalos.Text = "Cantidad intervalos:";
             // 
-            // textBoxCantIntervalos
-            // 
-            textBoxCantIntervalos.Location = new Point(156, 39);
-            textBoxCantIntervalos.Name = "textBoxCantIntervalos";
-            textBoxCantIntervalos.Size = new Size(73, 27);
-            textBoxCantIntervalos.TabIndex = 1;
-            // 
             // dataGridViewDistFrecuencia
             // 
             dataGridViewDistFrecuencia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewDistFrecuencia.Location = new Point(516, 96);
+            dataGridViewDistFrecuencia.Location = new Point(482, 96);
             dataGridViewDistFrecuencia.Name = "dataGridViewDistFrecuencia";
             dataGridViewDistFrecuencia.RowHeadersWidth = 51;
             dataGridViewDistFrecuencia.RowTemplate.Height = 29;
-            dataGridViewDistFrecuencia.Size = new Size(502, 310);
+            dataGridViewDistFrecuencia.Size = new Size(536, 457);
             dataGridViewDistFrecuencia.TabIndex = 14;
+            // 
+            // chartHistograma
+            // 
+            chartArea1.Name = "ChartArea1";
+            chartHistograma.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartHistograma.Legends.Add(legend1);
+            chartHistograma.Location = new Point(482, 96);
+            chartHistograma.Name = "chartHistograma";
+            chartHistograma.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartHistograma.Series.Add(series1);
+            chartHistograma.Size = new Size(534, 457);
+            chartHistograma.TabIndex = 15;
+            chartHistograma.Text = "chart1";
+            // 
+            // buttonGraficar
+            // 
+            buttonGraficar.Location = new Point(145, 495);
+            buttonGraficar.Name = "buttonGraficar";
+            buttonGraficar.Size = new Size(110, 58);
+            buttonGraficar.TabIndex = 16;
+            buttonGraficar.Text = "Graficar";
+            buttonGraficar.UseVisualStyleBackColor = true;
+            buttonGraficar.Click += buttonGraficar_Click;
+            // 
+            // comboBoxCantIntervalos
+            // 
+            comboBoxCantIntervalos.FormattingEnabled = true;
+            comboBoxCantIntervalos.Location = new Point(156, 42);
+            comboBoxCantIntervalos.Name = "comboBoxCantIntervalos";
+            comboBoxCantIntervalos.Size = new Size(87, 28);
+            comboBoxCantIntervalos.TabIndex = 17;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1070, 565);
+            ClientSize = new Size(1028, 565);
+            Controls.Add(buttonGraficar);
+            Controls.Add(chartHistograma);
             Controls.Add(dataGridViewDistFrecuencia);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
@@ -239,6 +275,7 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewDistFrecuencia).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartHistograma).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -259,8 +296,10 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private TextBox textBoxCantIntervalos;
         private Label labelCantidadIntervalos;
         private DataGridView dataGridViewDistFrecuencia;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartHistograma;
+        private Button buttonGraficar;
+        private ComboBox comboBoxCantIntervalos;
     }
 }

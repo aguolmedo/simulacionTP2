@@ -11,10 +11,9 @@ namespace tp2SimulacionFINAL
     {
 
         public static void GenerarTablaFrecuencias(double media,double desviacion,ComboBox comboBoxDistribucion,DataGridView dataGrid,double[] muestraGenerada, int numIntervalos) {
-            // Calcular la amplitud del intervalo
+            // Calcular la amplitud del intervalo (Tamaño intervalo)
             double amplitud = ((muestraGenerada.Max() - muestraGenerada.Min()) / numIntervalos) + 0.01;
 
-            // Crear una lista para almacenar los resultados
             List<dynamic> tabla = new List<dynamic>();
 
             // Calcular la distribución de frecuencias
@@ -24,7 +23,6 @@ namespace tp2SimulacionFINAL
                 double hasta = Math.Round(muestraGenerada.Min() + ((i + 1) * amplitud),4);
                 int fo = 0;
 
-                // Contar la frecuencia observada (FO)
                 foreach (double valor in muestraGenerada)
                 {
                     if (valor >= desde && valor <= hasta)
@@ -48,11 +46,9 @@ namespace tp2SimulacionFINAL
                 }
 
 
-                // Agregar los resultados a la lista
-                tabla.Add(new { Intervalo = $"{desde} - {hasta}", FO = fo, FE = fe });
+                tabla.Add(new { Intervalo = $"{desde} - {hasta}", FO = fo, FE = Math.Round(fe,4) });
             }
 
-            // Asignar la lista como fuente de datos del DataGridView
             dataGrid.DataSource = tabla;
         }
 
