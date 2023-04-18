@@ -103,7 +103,7 @@ namespace tp2SimulacionFINAL
             switch (comboBoxDistribucion.SelectedValue.ToString())
             {
                 case "1":
-                    double[] muestraUniforme = GeneradorHelper.GenerarDistUniforme(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToInt32(textBoxParametro1.Text), Convert.ToInt32(textBoxParametro2.Text));
+                    double[] muestraUniforme = GeneradorHelper.GenerarDistUniforme(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToSingle(textBoxParametro1.Text), Convert.ToSingle(textBoxParametro2.Text));
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraUniforme.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
 
@@ -112,14 +112,14 @@ namespace tp2SimulacionFINAL
 
 
                 case "2":
-                    double[] muestraExpNegativa = GeneradorHelper.GenerarDistExpNegativa(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToInt32(textBoxParametro1.Text));
+                    double[] muestraExpNegativa = GeneradorHelper.GenerarDistExpNegativa(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToSingle(textBoxParametro1.Text));
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraExpNegativa.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
                     double parametro2 = 0.0;
                     GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), parametro2, comboBoxDistribucion, dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos); ;
                     break;
                 case "3":
-                    double[] muestraNormal = GeneradorHelper.GenerarDistNormal(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToInt32(textBoxParametro1.Text), Convert.ToInt32(textBoxParametro2.Text));
+                    double[] muestraNormal = GeneradorHelper.GenerarDistNormal(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToDouble(textBoxParametro1.Text), Convert.ToDouble(textBoxParametro2.Text));
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraNormal.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
 
