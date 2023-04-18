@@ -141,6 +141,10 @@ namespace tp2SimulacionFINAL
 
         private void buttonGraficar_Click(object sender, EventArgs e)
         {
+            if (dataGridViewDistFrecuencia.Rows.Count == 0) {
+                MessageBox.Show("No se genero ninguna muestra.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             FormHistograma formHistograma = new FormHistograma(dataGridViewDistFrecuencia);
             formHistograma.Show();
         }
@@ -216,8 +220,9 @@ namespace tp2SimulacionFINAL
         private bool validarInputs()
         {
             // Obtener los valores de los TextBox
+            int tamañoMuestra;
             double parametro1, parametro2;
-            if (double.TryParse(textBoxParametro1.Text, out parametro1) && double.TryParse(textBoxParametro2.Text, out parametro2))
+            if (double.TryParse(textBoxParametro1.Text, out parametro1) && double.TryParse(textBoxParametro2.Text, out parametro2) && int.TryParse(textBoxTamañoMuestra.Text, out tamañoMuestra))
             {
                 return true;
             }
