@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Windows.Forms;
 
 namespace tp2SimulacionFINAL
 {
@@ -95,15 +97,20 @@ namespace tp2SimulacionFINAL
         private void buttonGenerarMuestra_Click(object sender, EventArgs e)
         {
 
+            if (!validarInputs()) return;
+
             dataGridViewDistFrecuencia.Visible = true;
 
             var cantIntervalos = comboBoxCantIntervalos.Text == null | comboBoxCantIntervalos.Text == "" ? Convert.ToInt32(Math.Ceiling(Math.Sqrt(Convert.ToInt32(textBoxTamañoMuestra.Text)))) : Convert.ToInt32(comboBoxCantIntervalos.SelectedValue);
 
+            var parametro1 = Math.Round(Convert.ToDouble(textBoxParametro1.Text),4);
+
+            var parametro2 = Math.Round(Convert.ToDouble(textBoxParametro1.Text),4);
 
             switch (comboBoxDistribucion.SelectedValue.ToString())
             {
                 case "1":
-                    double[] muestraUniforme = GeneradorHelper.GenerarDistUniforme(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToSingle(textBoxParametro1.Text), Convert.ToSingle(textBoxParametro2.Text));
+                    double[] muestraUniforme = GeneradorHelper.GenerarDistUniforme(Convert.ToInt32(textBoxTamañoMuestra.Text), parametro1, parametro2);
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraUniforme.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
 
@@ -112,18 +119,20 @@ namespace tp2SimulacionFINAL
 
 
                 case "2":
-                    double[] muestraExpNegativa = GeneradorHelper.GenerarDistExpNegativa(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToSingle(textBoxParametro1.Text));
+                    if (!validarExponencial()) break;
+                    double[] muestraExpNegativa = GeneradorHelper.GenerarDistExpNegativa(Convert.ToInt32(textBoxTamañoMuestra.Text), parametro1);
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraExpNegativa.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
-                    double parametro2 = 0.0;
-                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), parametro2, comboBoxDistribucion, dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos); ;
+                    parametro2 = 0.0;
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(parametro1, parametro2, comboBoxDistribucion, dataGridViewDistFrecuencia, muestraExpNegativa, cantIntervalos); ;
                     break;
                 case "3":
-                    double[] muestraNormal = GeneradorHelper.GenerarDistNormal(Convert.ToInt32(textBoxTamañoMuestra.Text), Convert.ToDouble(textBoxParametro1.Text), Convert.ToDouble(textBoxParametro2.Text));
+                    if (!validarNormal()) break;
+                    double[] muestraNormal = GeneradorHelper.GenerarDistNormal(Convert.ToInt32(textBoxTamañoMuestra.Text), parametro1, parametro2);
                     dataGridViewMuestra.Columns.Clear();
                     dataGridViewMuestra.DataSource = muestraNormal.Select(valor => new { Muestra = valor }).ToList(); // Asignar los datos generados como fuente de datos del DataGridView
 
-                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(Convert.ToDouble(textBoxParametro1.Text), Convert.ToDouble(textBoxParametro2.Text), comboBoxDistribucion, dataGridViewDistFrecuencia, muestraNormal, cantIntervalos);
+                    GeneradorTablaFrecuenciasHelper.GenerarTablaFrecuencias(parametro1, parametro2, comboBoxDistribucion, dataGridViewDistFrecuencia, muestraNormal, cantIntervalos);
                     break;
             }
 
@@ -134,6 +143,91 @@ namespace tp2SimulacionFINAL
         {
             FormHistograma formHistograma = new FormHistograma(dataGridViewDistFrecuencia);
             formHistograma.Show();
+        }
+        private bool validarNormal() 
+        {
+            // Obtener los valores de los TextBox
+            double media, desviacion;
+            if (double.TryParse(textBoxParametro1.Text, out media) && double.TryParse(textBoxParametro2.Text, out desviacion))
+            {
+                if (desviacion < 0)
+                {
+                    MessageBox.Show("La desviacion estandar debe ser mayor o igual a 0.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                return true;
+            }
+            else
+            {
+                // Mostrar mensajes de error si los valores no son números double válidos
+                MessageBox.Show("Por favor ingrese números válidos", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+        }
+
+        private bool validarExponencial()
+        {
+            // Obtener los valores de los TextBox
+            double media;
+            if (double.TryParse(textBoxParametro1.Text, out media) )
+            {
+                if (media < 0)
+                {
+                    MessageBox.Show("La desviacion estandar debe ser mayor o igual a 0.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                return true;
+            }
+            else
+            {
+                // Mostrar mensajes de error si los valores no son números double válidos
+                MessageBox.Show("Por favor ingrese números válidos", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+        }
+
+        private bool validarUniforme()
+        {
+            // Obtener los valores de los TextBox
+            double media, desviacion;
+            if (double.TryParse(textBoxParametro1.Text, out media) && double.TryParse(textBoxParametro2.Text, out desviacion))
+            {
+                if (desviacion < 0)
+                {
+                    MessageBox.Show("La desviacion estandar debe ser mayor o igual a 0.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                return true;
+            }
+            else
+            {
+                // Mostrar mensajes de error si los valores no son números double válidos
+                MessageBox.Show("Por favor ingrese números válidos", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+        }
+
+        private bool validarInputs()
+        {
+            // Obtener los valores de los TextBox
+            double parametro1, parametro2;
+            if (double.TryParse(textBoxParametro1.Text, out parametro1) && double.TryParse(textBoxParametro2.Text, out parametro2))
+            {
+                return true;
+            }
+            else
+            {
+                // Mostrar mensajes de error si los valores no son números double válidos
+                MessageBox.Show("Por favor ingrese números válidos", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
         }
     }
 }

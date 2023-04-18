@@ -42,23 +42,23 @@
             legend1.Name = "Legend1";
             chartHistograma.Legends.Add(legend1);
             chartHistograma.Location = new Point(1, 1);
-            chartHistograma.Margin = new Padding(3, 2, 3, 2);
             chartHistograma.Name = "chartHistograma";
             chartHistograma.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chartHistograma.Series.Add(series1);
-            chartHistograma.Size = new Size(798, 450);
+            chartHistograma.Size = new Size(1100, 850);
             chartHistograma.TabIndex = 16;
             chartHistograma.Text = "chart1";
             // 
             // FormHistograma
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1082, 823);
             Controls.Add(chartHistograma);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormHistograma";
             ShowIcon = false;
             Text = "FormHistograma";

@@ -10,7 +10,7 @@ namespace tp2SimulacionFINAL
     public class GeneradorHelper
     {
 
-        public static double[] GenerarDistUniforme(int n, float a, float b) 
+        public static double[] GenerarDistUniforme(int n, double a, double b) 
         {
             var variablesGeneradas = new double[n];
             var rnd = new Random();
@@ -22,7 +22,7 @@ namespace tp2SimulacionFINAL
         
         }
 
-        public static double[] GenerarDistExpNegativa(int n, float media) {
+        public static double[] GenerarDistExpNegativa(int n, double media) {
 
             var variablesGeneradas = new double[n];
             var rnd = new Random();

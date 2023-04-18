@@ -62,7 +62,12 @@ namespace tp2SimulacionFINAL
 
                 serieFE.Points.AddXY($"Intervalo {desde}-{hasta}", fe[i]);
                 serieFO.Points.AddXY($"Intervalo {desde}-{hasta}", fo[i]);
+
+                serieFO.Points[i].Label = fo[i].ToString();
+                serieFE.Points[i].Label = fe[i].ToString();
             }
+
+           
 
             histograma.ChartAreas[0].AxisX.Interval = 1; // Mostrar todas las etiquetas del eje X
             histograma.ChartAreas[0].AxisX.LabelStyle.Angle = -45; // Rotar etiquetas del eje X para una mejor legibilidad
