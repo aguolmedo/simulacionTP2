@@ -13,7 +13,6 @@ namespace tp2SimulacionFINAL
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            chartHistograma.Visible = false;
             labelParametro1.Visible = false;
             labelParametro2.Visible = false;
             textBoxParametro1.Visible = false;
@@ -97,7 +96,6 @@ namespace tp2SimulacionFINAL
         {
 
             dataGridViewDistFrecuencia.Visible = true;
-            chartHistograma.Visible = false;
 
             var cantIntervalos = comboBoxCantIntervalos.Text == null | comboBoxCantIntervalos.Text == "" ? Convert.ToInt32(Math.Ceiling(Math.Sqrt(Convert.ToInt32(textBoxTamañoMuestra.Text)))) : Convert.ToInt32(comboBoxCantIntervalos.SelectedValue);
 
@@ -134,9 +132,8 @@ namespace tp2SimulacionFINAL
 
         private void buttonGraficar_Click(object sender, EventArgs e)
         {
-            dataGridViewDistFrecuencia.Visible = false;
-            chartHistograma.Visible = true;
-            GeneradorHistogramaHelper.GenerarHistograma(dataGridViewDistFrecuencia, chartHistograma);
+            FormHistograma formHistograma = new FormHistograma(dataGridViewDistFrecuencia);
+            formHistograma.Show();
         }
     }
 }
