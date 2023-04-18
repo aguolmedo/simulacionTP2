@@ -41,7 +41,7 @@ namespace tp2SimulacionFINAL
                         fe = (double) muestraGenerada.Length * (1 - Math.Exp(-(1/media) * hasta)) - muestraGenerada.Length * (1 - Math.Exp(-1/media * desde)); // Calcular la frecuencia esperada (FE) [EXP NEGATIVA]
                         break;
                     case "3":
-                        fe = calcularFrecuenciaEsperadaNormal(desviacion, media, desde, hasta, muestraGenerada.Length);// Calcular la frecuencia esperada (FE) [NORMAL]
+                        fe = calcularFrecuenciaEsperadaNormal(media, desviacion , desde, hasta, muestraGenerada.Length);// Calcular la frecuencia esperada (FE) [NORMAL]
                         break;
                 }
 
@@ -53,14 +53,14 @@ namespace tp2SimulacionFINAL
         }
 
 
-        public static double calcularFrecuenciaEsperadaNormal(double desviacion,double media,double desde, double hasta, int tamanioMuestra)
+        public static double calcularFrecuenciaEsperadaNormal(double media,double desviacion,double desde, double hasta, int tamanioMuestra)
         {
             double marcaClase = (desde + hasta) / 2;
 
             return calcularDensidad(media,desviacion,marcaClase) * (hasta - desde) * tamanioMuestra;
         }
 
-        public static double calcularDensidad(double desviacion, double media,double x)
+        public static double calcularDensidad(double media, double desviacion,double x)
         {
             var p1 = 1 / (desviacion * (Math.Sqrt(2 * Math.PI)));
             var p2 = Math.Pow(((x - media) / desviacion), 2);

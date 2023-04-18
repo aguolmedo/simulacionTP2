@@ -105,7 +105,7 @@ namespace tp2SimulacionFINAL
 
             var parametro1 = Math.Round(Convert.ToDouble(textBoxParametro1.Text),4);
 
-            var parametro2 = Math.Round(Convert.ToDouble(textBoxParametro1.Text),4);
+            var parametro2 = Math.Round(Convert.ToDouble(textBoxParametro2.Text),4);
 
             switch (comboBoxDistribucion.SelectedValue.ToString())
             {
